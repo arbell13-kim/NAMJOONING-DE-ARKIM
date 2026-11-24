@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e9e8df">
+<title>Mi espacio Namjooning</title>
+<style>
+:root{--bg:#f1f4f5;--paper:#fffefa;--ink:#30404b;--muted:#78858d;--sage:#58778f;--sage2:#dce8ef;--lav:#e6e8f1;--sand:#eee9df;--rose:#f1e5e2;--line:#e1e6e8;--shadow:0 12px 35px rgba(48,64,75,.07);--blue:#58778f;--blue-soft:#e3edf2;--sky:#b9cedb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{background:#e7edf0;padding:28px 18px;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh}
+.brand{padding:4px 10px}.brand-mark{width:78px;height:78px;margin:0 0 13px}.brand-mark svg{width:100%;height:100%}.brand h1{font-family:Georgia,serif;font-weight:500;font-size:25px;line-height:1.1;margin:0 0 8px}.brand p{font-size:12px;color:#718074;margin:0}
+.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;text-align:left;padding:12px 13px;border-radius:13px;color:#59665c;font-size:14px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#fffefa;color:#344b5b;box-shadow:0 3px 12px #34463a0c}.nav .ico{width:20px;text-align:center;font-size:17px}
+.side-bottom{margin-top:auto;padding:14px;background:#f5f3eb;border-radius:16px;font-size:12px;color:#758074;line-height:1.6}
+main{padding:34px clamp(18px,4vw,56px);max-width:1400px;width:100%;margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:15px}.eyebrow{font-size:11px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.top h2{font-family:Georgia,serif;font-size:30px;font-weight:500;margin:5px 0}.motto{font-family:Georgia,serif;font-style:italic;font-size:13px;color:#607d91;margin-top:5px}.motto span{color:#78988e;font-size:17px}.date{font-size:13px;color:var(--muted);background:var(--paper);padding:10px 14px;border-radius:30px;border:1px solid var(--line)}
+.page{display:none}.page.active{display:block}.welcome{background:linear-gradient(115deg,#e1ebef,#e9e8ee 72%,#f0e9df);border-radius:24px;padding:27px 30px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:15px}.welcome h3{font-family:Georgia,serif;font-size:27px;font-weight:500;margin:0 0 8px}.welcome p{margin:0;color:#667367;font-size:14px}.leaf{font-size:48px;opacity:.7}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}.stat,.card{background:var(--paper);border:1px solid var(--line);border-radius:19px;padding:19px;box-shadow:var(--shadow)}.stat .label{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:27px;font-weight:600;margin:8px 0 3px}.stat small{font-size:11px;color:var(--muted)}
+.columns{display:grid;grid-template-columns:1.25fr .75fr;gap:17px}.card h3{font-size:16px;margin:0 0 15px;font-weight:600}.muted{color:var(--muted);font-size:13px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.activity{padding:12px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font-size:13px}.activity:last-child{border:0}.pill{font-size:11px;padding:5px 9px;border-radius:20px;background:var(--sage2);color:#536b57;white-space:nowrap}
+.btn{border:0;border-radius:12px;padding:11px 15px;background:var(--sage);color:white;font-size:13px;font-weight:600}.btn:hover{filter:brightness(.96)}.btn.secondary{background:#e5edf1;color:#4f6c80}.btn.ghost{background:transparent;color:var(--sage);border:1px solid #cbd7ca}.btn.danger{background:#f3e5e1;color:#965f52}.btn.small{padding:7px 10px;font-size:12px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#69756b}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid var(--line);background:#fff;border-radius:11px;color:var(--ink);outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:#91a491}.field textarea{min-height:105px;resize:vertical}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}.section-head h3{font-family:Georgia,serif;font-size:25px;font-weight:500;margin:0}.habit{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);gap:12px}.habit:last-child{border:0}.habit label{display:flex;align-items:center;gap:10px;font-size:14px}.habit input{accent-color:var(--sage);width:17px;height:17px}.note{background:#f4efe5;padding:15px;border-radius:14px;margin:10px 0;font-size:13px;white-space:pre-wrap}.empty{padding:26px;text-align:center;color:var(--muted);font-size:13px;background:#f7f6f1;border-radius:14px}
+footer{text-align:center;color:#92988f;font-size:11px;padding:30px 0 12px}
+.mobile-nav{display:none}
+@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{display:none}main{padding:23px 17px 95px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fdfcf8;border-top:1px solid var(--line);padding:8px 4px calc(8px + env(safe-area-inset-bottom));justify-content:space-around;z-index:5}.mobile-nav button{border:0;background:none;color:#788278;font-size:10px;display:grid;gap:3px;justify-items:center}.mobile-nav button.active{color:#496d86}.mobile-nav span{font-size:18px}.top{margin-bottom:20px}.welcome{padding:22px}.welcome h3{font-size:24px}}
+@media(max-width:480px){.brand-mark{width:64px;height:64px}.motto{max-width:250px;line-height:1.45}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.date{font-size:11px;padding:8px 10px}.stat{padding:14px}.stat strong{font-size:23px}.welcome p{font-size:12px}.leaf{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand">
+ <div class="brand-mark" aria-label="Logo de una ramita natural">
+  <svg viewBox="0 0 100 100" role="img" aria-label="Ramita con hojas">
+   <circle cx="50" cy="50" r="46" fill="#f7faf9" stroke="#9bb4c2" stroke-width="1.5"/>
+   <path d="M28 72 C42 60 53 43 68 22" fill="none" stroke="#58778f" stroke-width="2.6" stroke-linecap="round"/>
+   <path d="M38 62 C25 61 20 51 23 43 C34 43 41 49 38 62Z" fill="#91aa9d"/>
+   <path d="M48 49 C36 45 34 34 39 27 C49 31 53 39 48 49Z" fill="#b2c3b6"/>
+   <path d="M54 42 C53 29 61 22 70 22 C72 33 65 41 54 42Z" fill="#78988e"/>
+   <path d="M60 31 C62 18 72 14 80 18 C79 29 70 34 60 31Z" fill="#a5b8ad"/>
+   <path d="M34 67 C26 70 21 66 19 60 C27 56 34 60 34 67Z" fill="#c0cfc5"/>
+  </svg>
+ </div>
+ <h1>Mi espacio<br>Namjooning</h1>
+ <p>Un día a la vez · Un paso a la vez</p>
+</div>
+ <nav class="nav" id="sideNav">
+  <button class="active" data-page="inicio"><span class="ico">⌂</span>Inicio</button>
+  <button data-page="agenda"><span class="ico">▦</span>Mi agenda</button>
+  <button data-page="habitos"><span class="ico">✿</span>Hábitos</button>
+  <button data-page="registro"><span class="ico">＋</span>Registrar actividad</button>
+  <button data-page="aprendizaje"><span class="ico">▤</span>Aprendizaje</button>
+  <button data-page="creatividad"><span class="ico">✎</span>Creatividad</button>
+  <button data-page="notas"><span class="ico">▧</span>Notas</button>
+  <button data-page="resumen"><span class="ico">◷</span>Estadísticas</button>
+  <button data-page="ajustes"><span class="ico">⚙</span>Respaldo y ajustes</button>
+ </nav>
+ <div class="side-bottom">🌿 Tu espacio para aprender, crear, descansar y disfrutar. El progreso no tiene que ser perfecto.</div>
+</aside>
+<main>
+ <div class="top"><div><div class="eyebrow">Tu espacio personal</div><h2 id="pageTitle">Inicio</h2><div class="motto">“Mañana quizás sea un poquito más sabio y ese también seré yo” <span>♡</span></div></div><div class="date" id="todayLabel"></div></div>
+
+<section class="page active" id="inicio">
+ <div class="welcome"><div><h3>Hola, bienvenida a tu espacio 🌱</h3><p>Hoy puedes avanzar a tu ritmo. No necesitas hacerlo todo.</p></div><div class="leaf" aria-label="Ramita natural">🌿</div></div>
+ <div class="grid">
+  <div class="stat"><div class="label">Actividades registradas hoy</div><strong id="todayCount">0</strong><small>Lo que sí hiciste</small></div>
+  <div class="stat"><div class="label">Tiempo registrado hoy</div><strong id="todayTime">0 min</strong><small>Tiempo dedicado</small></div>
+  <div class="stat"><div class="label">Hábitos marcados hoy</div><strong id="habitCount">0</strong><small>Pequeños avances</small></div>
+  <div class="stat"><div class="label">Notas guardadas</div><strong id="noteCount">0</strong><small>Ideas y recordatorios</small></div>
+ </div>
+ <div class="columns">
+  <div class="card"><div class="row"><h3>Lo que hiciste hoy</h3><button class="btn small secondary" onclick="showPage('registro')">+ Registrar</button></div><div id="todayActivities" class="muted">Aún no hay actividades registradas.</div></div>
+  <div class="card"><h3>Un recordatorio amable</h3><p class="muted">Tu descanso también forma parte de tu progreso. Un día tranquilo no es un día perdido.</p><div style="font-size:30px;margin-top:20px">🌿</div></div>
+ </div>
+</section>
+
+<section class="page" id="agenda">
+ <div class="section-head"><h3>Mi agenda</h3><button class="btn" onclick="showPage('registro')">+ Nueva actividad</button></div>
+ <div class="card"><p class="muted">Una vista sencilla de tus actividades registradas. En la siguiente etapa añadiremos calendario semanal y horarios planificados.</p><div id="agendaList"></div></div>
+</section>
+
+<section class="page" id="habitos">
+ <div class="section-head"><h3>Mis hábitos</h3><span class="pill" id="habitProgress">0 completados</span></div>
+ <div class="card"><p class="muted">Marca lo que realizaste hoy. Las casillas se reinician visualmente cada día, pero el historial queda guardado.</p><div id="habitList"></div><div class="actions"><button class="btn secondary" onclick="addHabit()">+ Añadir hábito</button><button class="btn ghost" onclick="resetTodayHabits()">Desmarcar hoy</button></div></div>
+</section>
+
+<section class="page" id="registro">
+ <div class="section-head"><h3>Registrar actividad</h3></div>
+ <div class="card"><p class="muted">Registra actividades planeadas o espontáneas y el tiempo que realmente les dedicaste.</p>
+ <form id="activityForm" class="form">
+  <div class="field full"><label>Actividad</label><input id="actName" required placeholder="Ej. Leí 25 páginas de mi libro"></div>
+  <div class="field"><label>Categoría</label><select id="actCategory"><option>Aprendizaje</option><option>Creatividad</option><option>Entretenimiento</option><option>Salud y bienestar</option><option>Responsabilidades</option><option>Trabajo</option><option>Streaming</option><option>Imprevisto</option><option>Tiempo libre</option></select></div>
+  <div class="field"><label>Fecha</label><input id="actDate" type="date" required></div>
+  <div class="field"><label>Tiempo dedicado (minutos)</label><input id="actMinutes" type="number" min="0" value="30" required></div>
+  <div class="field"><label>¿Estaba planeada?</label><select id="actPlanned"><option value="Sí">Sí</option><option value="No">No, fue espontánea</option></select></div>
+  <div class="field full"><label>Notas (opcional)</label><textarea id="actNotes" placeholder="¿Qué avanzaste? ¿Qué quieres recordar?"></textarea></div>
+  <div class="field full"><button class="btn" type="submit">Guardar actividad</button></div>
+ </form></div>
+ <div class="card" style="margin-top:16px"><h3>Registros recientes</h3><div id="recentActivities"></div></div>
+</section>
+
+<section class="page" id="aprendizaje">
+ <div class="section-head"><h3>Mi aprendizaje</h3></div>
+ <div class="grid">
+  <div class="stat"><div class="label">Idiomas</div><strong>2</strong><small>Duolingo + repaso físico</small></div>
+  <div class="stat"><div class="label">Programación</div><strong>En curso</strong><small>Dos sesiones por semana</small></div>
+  <div class="stat"><div class="label">Lectura</div><strong>Libre</strong><small>Construir un horario fijo</small></div>
+  <div class="stat"><div class="label">Otros cursos</div><strong>Abierto</strong><small>Para tus próximos aprendizajes</small></div>
+ </div>
+ <div class="card"><h3>Registrar aprendizaje</h3><p class="muted">Utiliza el registro general y selecciona la categoría Aprendizaje. En una siguiente versión añadiremos seguimiento por idioma, libro y curso, con metas propias.</p><button class="btn" onclick="showPage('registro')">Registrar aprendizaje</button></div>
+</section>
+
+<section class="page" id="creatividad">
+ <div class="section-head"><h3>Mi espacio creativo</h3></div>
+ <div class="columns">
+  <div class="card"><h3>✎ Escritura</h3><p class="muted">Tu meta inicial: escribir tres veces por semana, aunque sea un poco.</p><button class="btn secondary" onclick="quickRecord('Escritura','Creatividad')">Registrar escritura</button></div>
+  <div class="card"><h3>✿ Diseño</h3><p class="muted">Diseño físico, digital, ideas visuales y proyectos personales.</p><button class="btn secondary" onclick="quickRecord('Diseño','Creatividad')">Registrar diseño</button></div>
+ </div>
+ <div class="card" style="margin-top:16px"><h3>Historial creativo</h3><div id="creativeList"></div></div>
+</section>
+
+<section class="page" id="notas">
+ <div class="section-head"><h3>Mi libreta personal</h3></div>
+ <div class="card"><form id="noteForm" class="form"><div class="field full"><label>Título</label><input id="noteTitle" placeholder="Ej. Idea para un proyecto"></div><div class="field full"><label>Nota</label><textarea id="noteBody" required placeholder="Escribe aquí lo que quieras recordar..."></textarea></div><div class="field full"><button class="btn">Guardar nota</button></div></form></div>
+ <div class="card" style="margin-top:16px"><h3>Notas guardadas</h3><div id="notesList"></div></div>
+</section>
+
+<section class="page" id="resumen">
+ <div class="section-head"><h3>Mis estadísticas</h3></div>
+ <div class="grid">
+  <div class="stat"><div class="label">Actividades totales</div><strong id="allCount">0</strong><small>En todos tus registros</small></div>
+  <div class="stat"><div class="label">Tiempo total</div><strong id="allTime">0 h</strong><small>Tiempo registrado</small></div>
+  <div class="stat"><div class="label">Días con actividad</div><strong id="activeDays">0</strong><small>Días registrados</small></div>
+  <div class="stat"><div class="label">Actividades espontáneas</div><strong id="spontaneous">0</strong><small>Lo que surgió en el camino</small></div>
+ </div>
+ <div class="card"><h3>Tiempo por categoría</h3><div id="categoryStats"></div></div>
+</section>
+
+<section class="page" id="ajustes">
+ <div class="section-head"><h3>Respaldo y ajustes</h3></div>
+ <div class="card"><h3>Tu información</h3><p class="muted">Esta primera versión guarda la información en el navegador de este dispositivo. Exporta un respaldo con frecuencia. Para compartir los mismos datos entre celular y computadora, conectaremos una base de datos en la nube en la siguiente etapa.</p><div class="actions"><button class="btn" onclick="exportData()">Exportar respaldo (.json)</button><label class="btn secondary" for="importFile">Importar respaldo</label><input id="importFile" type="file" accept=".json,application/json" hidden></div></div>
+ <div class="card" style="margin-top:16px"><h3>Sobre la sincronización</h3><p class="muted">La sincronización multidispositivo requiere una cuenta y un servicio de base de datos. No introduzcas contraseñas ni datos sensibles en esta versión local.</p></div>
+ <div class="card" style="margin-top:16px"><h3>Datos de prueba</h3><p class="muted">Puedes borrar todos los datos guardados en este navegador. Esta acción no se puede deshacer.</p><button class="btn danger" onclick="clearAll()">Borrar todos mis datos locales</button></div>
+</section>
+
+<footer>MI ESPACIO NAMJOONING · Crece a tu propio ritmo</footer>
+</main>
+</div>
+<nav class="mobile-nav" id="mobileNav">
+ <button class="active" data-page="inicio"><span>⌂</span>Inicio</button>
+ <button data-page="agenda"><span>▦</span>Agenda</button>
+ <button data-page="habitos"><span>✿</span>Hábitos</button>
+ <button data-page="registro"><span>＋</span>Registrar</button>
+ <button data-page="notas"><span>▧</span>Notas</button>
+</nav>
+<script>
+const KEY='namjooning_v1';
+const today=()=>new Date().toLocaleDateString('en-CA');
+let data=JSON.parse(localStorage.getItem(KEY)||'{"activities":[],"notes":[],"habits":[],"habitChecks":{}}');
+let habits=data.habits.length?data.habits:['Duolingo: idioma 1','Duolingo: idioma 2','Repaso físico de idiomas','Lectura','Ejercicio en casa','Streaming','Escritura','Diseño','Limpieza de habitación'];
+data.habits=habits;
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(data));render()};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('pageTitle').textContent=({inicio:'Inicio',agenda:'Mi agenda',habitos:'Hábitos',registro:'Registrar actividad',aprendizaje:'Aprendizaje',creatividad:'Creatividad',notas:'Notas',resumen:'Estadísticas',ajustes:'Respaldo y ajustes'})[id];}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+document.getElementById('todayLabel').textContent=new Date().toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+document.getElementById('actDate').value=today();
+document.getElementById('activityForm').addEventListener('submit',e=>{e.preventDefault();data.activities.unshift({id:crypto.randomUUID(),name:document.getElementById('actName').value.trim(),category:document.getElementById('actCategory').value,date:document.getElementById('actDate').value,minutes:Number(document.getElementById('actMinutes').value),planned:document.getElementById('actPlanned').value,notes:document.getElementById('actNotes').value.trim()});e.target.reset();document.getElementById('actDate').value=today();document.getElementById('actMinutes').value=30;save();showPage('inicio')});
+document.getElementById('noteForm').addEventListener('submit',e=>{e.preventDefault();data.notes.unshift({id:crypto.randomUUID(),title:document.getElementById('noteTitle').value.trim()||'Nota sin título',body:document.getElementById('noteBody').value.trim(),date:today()});e.target.reset();save()});
+function quickRecord(name,cat){document.getElementById('actName').value=name;document.getElementById('actCategory').value=cat;showPage('registro')}
+function addHabit(){let h=prompt('¿Qué hábito quieres añadir?');if(h&&h.trim()&&!data.habits.includes(h.trim())){data.habits.push(h.trim());save()}}
+function resetTodayHabits(){if(confirm('¿Desmarcar todos los hábitos de hoy?')){data.habitChecks[today()]=[];save()}}
+function render(){
+ const t=today(),acts=data.activities,day=acts.filter(a=>a.date===t),checks=data.habitChecks[t]||[];
+ document.getElementById('todayCount').textContent=day.length;document.getElementById('todayTime').textContent=day.reduce((s,a)=>s+a.minutes,0)+' min';document.getElementById('habitCount').textContent=checks.length;document.getElementById('noteCount').textContent=data.notes.length;
+ document.getElementById('todayActivities').innerHTML=day.length?day.map(a=>`<div class="activity"><span>${esc(a.name)}<br><small class="muted">${esc(a.category)}</small></span><span class="pill">${a.minutes} min</span></div>`).join(''):'<div class="empty">Aún no hay actividades registradas. Lo que hagas hoy también merece quedar guardado.</div>';
+ const list=acts.slice(0,30).map(a=>`<div class="activity"><span>${esc(a.name)}<br><small class="muted">${esc(a.category)} · ${a.date} · ${a.planned==='No'?'Espontánea':'Planeada'}</small>${a.notes?`<br><small class="muted">${esc(a.notes)}</small>`:''}</span><span style="text-align:right;white-space:nowrap">${a.minutes} min<br><button class="btn small danger" onclick="deleteActivity('${a.id}')">Eliminar</button></span></div>`).join('')||'<div class="empty">Todavía no hay registros.</div>';
+ document.getElementById('recentActivities').innerHTML=list;document.getElementById('agendaList').innerHTML=list;
+ document.getElementById('habitProgress').textContent=checks.length+' de '+data.habits.length+' realizados';
+ document.getElementById('habitList').innerHTML=data.habits.map((h,i)=>`<div class="habit"><label><input type="checkbox" ${checks.includes(h)?'checked':''} onchange="toggleHabit('${encodeURIComponent(h)}',this.checked)"><span>${esc(h)}</span></label><span class="muted">${checks.includes(h)?'Hecho ✓':'Pendiente'}</span></div>`).join('');
+ document.getElementById('notesList').innerHTML=data.notes.map(n=>`<div class="note"><div class="row"><strong>${esc(n.title)}</strong><button class="btn small danger" onclick="deleteNote('${n.id}')">Eliminar</button></div><div class="muted" style="margin:5px 0 9px">${n.date}</div>${esc(n.body)}</div>`).join('')||'<div class="empty">Tu libreta está lista para tus ideas.</div>';
+ document.getElementById('creativeList').innerHTML=acts.filter(a=>a.category==='Creatividad').slice(0,15).map(a=>`<div class="activity"><span>${esc(a.name)}<br><small class="muted">${a.date}</small></span><span class="pill">${a.minutes} min</span></div>`).join('')||'<div class="empty">Tus ideas y creaciones aparecerán aquí.</div>';
+ document.getElementById('allCount').textContent=acts.length;document.getElementById('allTime').textContent=(acts.reduce((s,a)=>s+a.minutes,0)/60).toFixed(1)+' h';document.getElementById('activeDays').textContent=new Set(acts.map(a=>a.date)).size;document.getElementById('spontaneous').textContent=acts.filter(a=>a.planned==='No').length;
+ const cats={};acts.forEach(a=>cats[a.category]=(cats[a.category]||0)+a.minutes);
+ document.getElementById('categoryStats').innerHTML=Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,m])=>`<div class="activity"><span>${esc(c)}</span><strong>${m>=60?(m/60).toFixed(1)+' h':m+' min'}</strong></div>`).join('')||'<div class="empty">Cuando registres actividades, aquí verás cómo distribuyes tu tiempo.</div>';
+}
+function toggleHabit(h,on){h=decodeURIComponent(h);let c=data.habitChecks[today()]||[];data.habitChecks[today()]=on?[...new Set([...c,h])]:c.filter(x=>x!==h);save()}
+function deleteActivity(id){if(confirm('¿Eliminar este registro?')){data.activities=data.activities.filter(a=>a.id!==id);save()}}
+function deleteNote(id){if(confirm('¿Eliminar esta nota?')){data.notes=data.notes.filter(n=>n.id!==id);save()}}
+function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mi-espacio-namjooning-respaldo-'+today()+'.json';a.click();URL.revokeObjectURL(url)}
+document.getElementById('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.activities)||!Array.isArray(d.notes)||!Array.isArray(d.habits))throw Error();if(confirm('Importar reemplazará los datos actuales de este navegador. ¿Continuar?')){data=d;save();alert('Respaldo importado.')}}catch(err){alert('No se pudo leer el respaldo. Comprueba que sea un archivo Namjooning válido.')}e.target.value=''});
+function clearAll(){if(confirm('¿Borrar permanentemente todos los datos locales de Namjooning en este navegador? Exporta un respaldo antes si deseas conservarlos.')){localStorage.removeItem(KEY);data={activities:[],notes:[],habits:['Duolingo: idioma 1','Duolingo: idioma 2','Repaso físico de idiomas','Lectura','Ejercicio en casa','Streaming','Escritura','Diseño','Limpieza de habitación'],habitChecks:{}};save()}}
+render();
+</script>
+</body>
+</html>
